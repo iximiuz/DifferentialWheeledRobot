@@ -9,15 +9,24 @@ class Texture {
     friend class Renderer;
 
 private:
+    int x_;
+    int y_;
     int width_;
     int height_;
+    double angle_;
     SDL_Texture *sdl_texture_;
 
-    Texture(SDL_Renderer *sdl_renderer, int width, int height);
+    Texture(SDL_Renderer *sdl_renderer, 
+            int x, int y, 
+            int width, int height, 
+            double angle = 0);
 
 public:
+    inline int GetX() const { return x_; }
+    inline int GetY() const { return y_; }
     inline int GetWidth() const { return width_; }
     inline int GetHeight() const { return height_; }
+    inline double GetAngle() const { return angle_; }
 
     ~Texture();
 };
