@@ -68,7 +68,9 @@ PTexture Renderer::CreateRobotTexture() const {
     PTexture texture(new Texture(sdl_renderer_, width_/2, height_/2, 32, 32, 45.0));
 
     RenderingContext _ctx(sdl_renderer_, texture->sdl_texture_);
-    
+
+    SDL_OK(SDL_SetTextureBlendMode(texture->sdl_texture_, SDL_BLENDMODE_BLEND));
+    SDL_OK(SDL_SetRenderDrawBlendMode(sdl_renderer_, SDL_BLENDMODE_NONE));
     SDL_OK(SDL_SetRenderDrawColor(sdl_renderer_, 255, 0, 0, 0));
     SDL_OK(SDL_RenderClear(sdl_renderer_));
     // SDL_RenderDrawRect(renderer, &r);

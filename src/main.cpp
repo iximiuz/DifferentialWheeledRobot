@@ -1,6 +1,6 @@
-#include <chrono>
 #include <iostream>
-#include <thread>
+
+#include <SDL.h>
 
 #include "engine/renderer.hpp"
 #include "robot.hpp"
@@ -9,12 +9,25 @@ int main() {
     std::cout << "Starting... " << std::endl;
 
     Robot r(20.0, 10.0, 400.0, 300.0, 5.0);
-    std::cout << sizeof(r) << std::endl;
 
-    Renderer engine;
-    engine.Render(engine.CreateRobotTexture());
+    Renderer engine(800, 600);
 
-    std::this_thread::sleep_for(std::chrono::seconds(10));
+    SDL_Event e;
+    bool quit = false;
+    while (!quit){
+        while (SDL_PollEvent(&e)){
+            if (e.type == SDL_QUIT){
+                quit = true;
+            }
+            if (e.type == SDL_KEYDOWN){
+                quit = true;
+            }
+            if (e.type == SDL_MOUSEBUTTONDOWN){
+                quit = true;
+            }
+        }
+        engine.Render(engine.CreateRobotTexture());
+    }
     return 0;
 }
 
